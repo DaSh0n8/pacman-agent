@@ -357,6 +357,7 @@ class Agent1(DummyAgent):
     my_pos = my_local_state.getPosition()
 
     ghosts = []
+
     for i in self.getOpponents(gameState):
       opponentState = gameState.getAgentState(i)
       ghostForm = not opponentState.isPacman
@@ -403,7 +404,6 @@ class Agent1(DummyAgent):
             self.current_target = self.getClosestPos(gameState, untargetedFoods)
             self.sharedState.addTarget(self.current_target)
         else:
-            # If all foods are targeted, revert to previous behavior (or any other strategy)
             self.current_target = self.getClosestPos(gameState, foodList)
 
     problem = PositionSearchProblem(gameState, self.current_target, self.index)
@@ -440,21 +440,6 @@ class Agent2(DummyAgent):
       super().__init__(index)
       self.targetTracker = targetTracker
 
-  # this agent will reach to the furthest goal
-  # def getClosestPos(self, gameState, pos_list):
-  #   return self.getFurthestPos(gameState, pos_list)
-  #
-  # def getFurthestPos(self, gameState, pos_list):
-  #   max_length = -1
-  #   max_pos = None
-  #   my_local_state = gameState.getAgentState(self.index)
-  #   my_pos = my_local_state.getPosition()
-  #   for pos in pos_list:
-  #     temp_length = self.getMazeDistance(my_pos, pos)
-  #     if temp_length > max_length:
-  #       max_length = temp_length
-  #       max_pos = pos
-  #   return max_pos
   def chooseAction(self, gameState):
       """
       Picks among actions randomly.
@@ -463,6 +448,7 @@ class Agent2(DummyAgent):
       my_pos = my_local_state.getPosition()
 
       ghosts = []
+
       for i in self.getOpponents(gameState):
         opponentState = gameState.getAgentState(i)
         ghostForm = not opponentState.isPacman
@@ -495,11 +481,8 @@ class Agent2(DummyAgent):
             self.current_target = self.getClosestPos(gameState, untargetedFoods)
             self.targetTracker.addTarget(self.current_target)
         else:
-            # If all foods are targeted, revert to previous behavior (or any other strategy)
             self.current_target = self.getClosestPos(gameState, foodList)
 
-        # self.current_target = self.getClosestPos(gameState, foodGrid.asList())
-        # print("find food mode")
 
       problem = PositionSearchProblem(gameState, self.current_target, self.index)
       path = self.bidirectionalAStarSearch(problem)
