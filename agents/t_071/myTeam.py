@@ -45,7 +45,7 @@ def createTeam(firstIndex, secondIndex, isRed,
 ##########
 # Agents #
 ##########
-MAX_CAPACITY = 5
+MAX_CAPACITY = 3
 RUNBACK_THRESHOLD = 2
 agent1_targets = []
 agent2_targets = []
@@ -477,6 +477,7 @@ class Agent2(DummyAgent):
 
         if closest_ghost_distance <= RUNBACK_THRESHOLD:
           self.current_target = self.getClosestPos(gameState, self.boundary)
+          print("run mode")
 
       if not self.current_target == None:
         # if agent already have a goal
@@ -485,6 +486,7 @@ class Agent2(DummyAgent):
         # if agent got all the food it needed
         # it will reach to the closest boundary with A* search (manhattanDistance as heuristic)
         self.current_target = self.getClosestPos(gameState, self.boundary)
+        print("go home mode")
       else:
         # if agent have more capacity to carry
         # it will find the next closest food
