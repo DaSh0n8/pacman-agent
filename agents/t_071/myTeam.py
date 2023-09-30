@@ -45,7 +45,7 @@ def createTeam(firstIndex, secondIndex, isRed,
 ##########
 # Agents #
 ##########
-MAX_CAPACITY = 4
+MAX_CAPACITY = 3
 RUNBACK_THRESHOLD = 2
 agent1_targets = []
 agent2_targets = []
