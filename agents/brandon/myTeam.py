@@ -16,7 +16,7 @@ from captureAgents import CaptureAgent
 import random, time, util
 from game import Directions
 import game
-from agents.t_071 import myUtil
+from agents.brandon import myUtil
 
 #################
 # Team creation #
