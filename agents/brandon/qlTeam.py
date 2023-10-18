@@ -4,7 +4,7 @@
 # educational purposes provided that (1) you do not distribute or publish
 # solutions, (2) you retain this notice, and (3) you provide clear
 # attribution to UC Berkeley, including a link to http://ai.berkeley.edu.
-# 
+#
 # Attribution Information: The Pacman AI projects were developed at UC Berkeley.
 # The core projects and autograders were primarily created by John DeNero
 # (denero@cs.berkeley.edu) and Dan Klein (klein@cs.berkeley.edu).
@@ -16,14 +16,15 @@ from captureAgents import CaptureAgent
 import random, time, util
 from game import Directions
 import game
-from agents.t_071 import myUtil
+from agents.brandon import myUtil, qlUtil
+
 
 #################
 # Team creation #
 #################
 
 def createTeam(firstIndex, secondIndex, isRed,
-               first = 'Agent1', second = 'Agent2'):
+               first = 'Agent1', second = 'QLearningPacmanAgent'):
   """
   This function should return a list of two agents that will form the
   team, initialized using firstIndex and secondIndex as their agent
@@ -503,6 +504,66 @@ class Agent2(DummyAgent):
         elif (new_x, new_y) in self.boundary:
           self.carrying = 0
         return path[0]
+
+
+class QLearningPacmanAgent(Agent2):
+    def __init__(self, index, targetTracker):
+        super().__init__(index, targetTracker)
+        self.qfunction = qlUtil.QTable()
+        self.bandit = qlUtil.EpsilonGreedy()
+        self.mdp = None
+        self.learner = None
+
+    def get_mdp(self, gameState):
+        return qlUtil.MDP(gameState, self, self.index)
+
+    def chooseAction(self, gameState):
+        if self.mdp is None:
+            self.mdp = self.get_mdp(gameState)
+            self.learner = qlUtil.QLearning(self.mdp, self.bandit, self.qfunction, self)
+            self.learner.execute(gameState, 100)
+
+        my_local_state = gameState.getAgentState(self.index)
+        my_pos = my_local_state.getPosition()
+
+        if self.current_target is None:
+            if self.carrying == MAX_CAPACITY or len(self.getFood(gameState).asList()) <= 2:
+                self.current_target = self.getClosestPos(gameState, self.boundary)
+            else:
+                foodGrid = self.getFood(gameState)
+                self.current_target = self.getClosestPos(gameState, foodGrid.asList())
+
+        # Get available actions
+        actions = gameState.getLegalActions(self.index)
+
+        # Choose action based on epsilon-greedy policy
+        action = self.bandit.select(my_pos, actions, self.qfunction)
+
+        if action is None:
+            problem = PositionSearchProblem(gameState, self.current_target, self.index)
+            path = self.bidirectionalAStarSearch(problem)
+
+            if path == []:
+                actions = gameState.getLegalActions(self.index)
+                return random.choice(actions)
+            else:
+                action = path[0]
+
+        dx, dy = game.Actions.directionToVector(action)
+        new_x, new_y = int(my_pos[0] + dx), int(my_pos[1] + dy)
+        reward = self.mdp.calculate_reward((new_x, new_y), gameState)
+        self.qfunction.update(my_pos, action, reward)
+
+        # Update state and return chosen action
+        if (new_x, new_y) == self.current_target:
+            self.current_target = None
+        if self.getFood(gameState)[new_x][new_y]:
+            self.carrying += 1
+        elif (new_x, new_y) in self.boundary:
+            self.carrying = 0
+        return action
+
+
 
 class TargetTracker:
     def __init__(self):
