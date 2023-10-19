@@ -34,7 +34,7 @@ Bidirectional A* Search.
 
 #### Competition results: Games - 4-6-21 
 
-![Iteration 1 results](images/iteration1_results.jpg)
+![Iteration 1 results](images/iteration1_results.JPG)
 
 As expected, this implementation did not perform well, as it was too simple and did not account for many scenarios, such as eating
 opponent ghosts when they are scared, or going after opponent pacmans when available.
@@ -58,7 +58,7 @@ Another thing I added was the ability for pacmans to run away from ghosts, and t
 
 #### Competition results: Games - 13-3-24
 
-![Iteration 2 results](images/iteration2_results.jpg)
+![Iteration 2 results](images/iteration2_results.JPG)
 
 After implementing these changes we were able to see some improvements in our results, but it is still not optimal 
 as the winrate is fairly low.
@@ -82,6 +82,6 @@ a path that the agent thinks is 'safe'.
 
 #### Competition results: Games - 25-0-15
 
-![Iteration 2 results](images/iteration3_results.jpg)
+![Iteration 2 results](images/iteration3_results.JPG)
 
 The new cost function and target tracker system managed to get us 25/40 wins.
