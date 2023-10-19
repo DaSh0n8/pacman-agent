@@ -25,9 +25,8 @@ You can structure your wiki pages in many different sections and styles. The abo
 
 List here the full name, email, and student number for each member of the team:
 
-* Student 1's Full Name - Student email - UoM Student number
+* Brandon Lim Vei Liang - brandonveili@student.unimelb.edu.au - 1430381
 * Student 2's Full Name - Student email - UoM Student number
-* Student 3's Full Name - Student email - UoM Student number
 
 
 ## Useful links - Wiki features

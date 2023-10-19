@@ -12,27 +12,26 @@
 ## Governing Strategy Tree  
 
 ### Motivation
-I tried implementing a Q-Learning algorithm, but my implementation was unoptimized and performed quite poorly. I had this 
-heuristic algorithm as a backup, but it ended up performing way better against my partner's agents. So I decided
-to focus on optimizing this heuristic algorithm instead.
+We tried implementing a Q-Learning algorithm, but the implementation was unoptimized and performed quite poorly. When playing
+against the other models developed by group members, we realized that the heuristic search submitted during
+the preliminary phase outperforms the Q-Learning algorithm, so we decided to focus on implementing this algorithm instead.
 
-[Back to top](#table-of-contents)
 
 ### Application  
-I implemented a bidirectional A* search for the agent's current target. An agent would choose its target based on the game's conditions
+We implemented a bidirectional A* search for the agent's current target. An agent would choose its target based on the game's conditions
 and its environment. For example, an agent would attempt to find its way back to the border if an enemy agent is getting too close, to
 prevent losing all its food.
 
-I also took advantage of heuristic search's cost function, which allows me to further optimize my model. For example,
-I set the cost for eating opponent ghosts to be higher, so that my pacman would go for them if they are in the vicinity.
-I also set the cost for running into enemy ghosts (when my agent is a pacman) to get higher based on the distance my agent is to
-the opponent. So my agent would attempt to take a path that it 'thinks' is safe, trying to avoid getting close to enemy agent
+We also took advantage of heuristic search's cost function, which allows us to further optimize my model. For example,
+we set the cost for eating opponent ghosts to be higher, so that our pacman would go for them if they are in the vicinity.
+We also set the cost for running into enemy ghosts (when the agent is a pacman) to get higher based on the distance our agent is to
+the opponent. So the agent would attempt to take a path that it 'thinks' is safe, trying to avoid getting close to enemy agent
 unless there's a reward that's worth going near an enemy for.
 
-I also implemented a Target Tracker system, so that both the agents are able to communicate with each other on the
+We also implemented a Target Tracker system, so that both the agents are able to communicate with each other on the
 food that they are currently going after. This Target Tracker is essentially a class, and the agents both share the same 
 instance of it. So an agent would only attempt to go after 'untargeted' foods.
-[Back to top](#table-of-contents)
+
 
 ### Trade-offs  
 #### *Advantages*  
@@ -58,11 +57,11 @@ As shown in the example above, both agents are going after the same group of foo
 and could be easily handled by just one agent.
 
 
-I think this model would have a lot more potential if we had implemented food clustering, so agents would specify a cluster of 
+This model would have a lot more potential if we had implemented food clustering, so agents would specify a cluster of 
 food that they are going after, or have it so that when there are only a few foods left to collect and they are close to each other,
 one agent could go for the food and the other could play defense. On the other hand, if the food are far from each other, we could
 have both agents going after different food to lessen the traversing time for each agent.
 
-Essentially, I think we could handle the agents' search differently, when the game is almost ending and there aren't much food
+Essentially, we probably could have handled the agents' search differently, when the game is almost ending and there aren't much food
 left.
 [Back to top](#table-of-contents)

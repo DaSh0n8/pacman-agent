@@ -26,10 +26,10 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
 ----
 ### Iteration 1:
 
-My first iteration of heuristic search was very straightforward, I just created various conditions in the form of if-statements
+Our first iteration of heuristic search was very straightforward, we just created various conditions in the form of if-statements
 and have them ordered by their priority in the chooseAction function. For example, running away from a ghost is a first priority,
-so I'd have the if condition check if there is a ghost nearby, and have my pacman run back to the border if the condition is true.
-So I'd just set the current target, whether it be food or border, and generate a path to the target using
+so we'd have the if condition check if there is a ghost nearby, and have our pacman run back to the border if the condition is true.
+Basically we'd just set the current target, whether it be food or border, and generate a path to the target using
 Bidirectional A* Search.
 
 #### Competition results: Games - 4-6-21 
@@ -38,23 +38,18 @@ Bidirectional A* Search.
 
 As expected, this implementation did not perform well, as it was too simple and did not account for many scenarios, such as eating
 opponent ghosts when they are scared, or going after opponent pacmans when available.
-In addition, there were some bugs in my code that caused some of the games to fail.
-#### Strategy summary
+In addition, there were some bugs in ourr code that caused some of the games to fail.
 
-| Pros            | Cons                                    |
-|-----------------|:----------------------------------------|
-| Straightforward | Did not account for a lot of situations |
-| Second line     | foo                                     |
 
 ### Iteration 2:
 
-The biggest improvement I've made in this iteration is the addition of a defensive agent. This agent would go after opponent pacmans when
+The biggest improvement we've made in this iteration is the addition of a defensive agent. This agent would go after opponent pacmans when
 it's able to see them. The intuition here is that if an opponent pacman is near enough that the agent can see it, it is probably
 worth going after that pacman. However, when it is not detecting any opponents close to the agent, it would act like a normal agent, 
 going after the food in opponents territories. Unexpectedly, this proved to be a huge advantage, because when the agent comes back from
 the border after collecting food, it would almost always block the opponent pacmans that are attempting to return to the border.
 
-Another thing I added was the ability for pacmans to run away from ghosts, and this applies for both the offensive and defensive agents.
+Another thing we added was the ability for pacmans to run away from ghosts, and this applies for both the offensive and defensive agents.
 
 #### Competition results: Games - 13-3-24
 
@@ -62,12 +57,6 @@ Another thing I added was the ability for pacmans to run away from ghosts, and t
 
 After implementing these changes we were able to see some improvements in our results, but it is still not optimal 
 as the winrate is fairly low.
-#### Strategy summary
-
-| Pros            | Cons |
-|-----------------|:-------------|
-| Straightforward | Second cell  |
-| Second line     | foo          |
 
 ### Iteration 3:
 
