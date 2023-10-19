@@ -8,6 +8,7 @@ This is because I have the agents only communicate about the current food that t
 the cluster of food that they are going after. So towards the end of the game when the food are close together, it'd usually only
 require one agent to collect all of the remaining food, but instead both my agents would take the same path and the second agent
 would often do nothing productive, as the agent in front would collect all the food by itself.
+
 ![Same food target](images/samefoodtarget.gif)
 
 As shown in this clip, the dark blue and light blue pacmans were at the same region so their food targets were very close,
