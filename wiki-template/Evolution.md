@@ -74,3 +74,39 @@ a path that the agent thinks is 'safe'.
 ![Iteration 2 results](images/iteration3_results.JPG)
 
 The new cost function and target tracker system managed to get us 25/40 wins.
+
+## Final Technique Chosen
+
+Other than tagging our techniques and observing their performance against staff agents, we've also matched our 
+techniques against each other. We played a total of ten games and recorded who the winner is for each game.
+
+| No. | Technique 1 | Technique 2 | Winner    |
+|-----|-------------|:------------|-----------|
+| 1   | MCTS        | Heuristic   | MCTS      |
+| 2   | MCTS        | Q-Learning  | MCTS      |
+| 3   | Q-Learning  | Heuristic   | Heuristic |
+| 4   | MCTS        | Q-Learning  | MCTS      |
+| 5   | Q-Learning  | MCTS        | MCTS      |
+| 6   | MCTS        | Q-Learning  | MCTS      |
+| 7   | Q-Learning  | Heuristic   | Heuristic |
+| 8   | MCTS        | Q-Learning  | MCTS      |
+| 9   | Q-Learning  | Heuristic   | Heuristic |
+| 10  | MCTS        | Heuristic   | MCTS      |
+
+As shown in the table, MCTS outperforms all the other models. Although there were games where the Heuristic Search
+came close to winning, MCTS is still the more consistent technique.
+
+Upon spectating these games live, we observed that the Heuristic Search's biggest weakness is its lack of greediness. 
+The MCTS agent is far better at collecting food compared to the Heuristic Search agent. 
+On top of that, The two agents
+are generally not communicating very well towards the end of the games and would
+often go after the same food.
+
+Q-Learning on the other hand, is highly unoptimized and would often run into opponent ghosts. We speculate that this is 
+due to the lack of data, as it'd require a lot more pretraining for the Q-table to converge.
+
+MCTS's biggest weakness is that it performs quite poorly against defensive agents. However, the path in which the offensive
+agent takes and its efficiency makes up for it.
+
+Ultimately, we used MCTS as our final 'submission' tag on the server, as it is the best performing agent we have and yields the most
+consistent scores on the server against staff agents.
